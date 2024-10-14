@@ -1,6 +1,8 @@
-import { PusherService } from './pusher.service';
+import { OpenAIService } from './openai.service';
 export declare class AppController {
-    private pusherService;
-    constructor(pusherService: PusherService);
-    messages(username: string, message: string): Promise<any[]>;
+    private readonly openaiService;
+    constructor(openaiService: OpenAIService);
+    getChatResponse(message: string): Promise<{
+        response: string;
+    }>;
 }
