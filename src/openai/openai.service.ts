@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { OpenAI } from 'openai';
 import {ConfigService} from "@nestjs/config"
+import * as fs from 'fs';
 
 @Injectable()
     export class OpenAIService{
@@ -12,9 +13,13 @@ import {ConfigService} from "@nestjs/config"
            });
         }
         async sendMessageToOpenAI(message: string): Promise<any> {
+            const systemPrompt = fs.readFileSync('backups/characters/Iroha', 'utf8')
+            
             const completion = await this.openai.chat.completions.create({
-                model: 'gpt-3.5-turbo',
-                messages: [{role: 'user', content: message}],
+                model: 'gpt-4o-mini',
+                messages: [
+                    {role:'system',content:systemPrompt},
+                    {role: 'user', content: message}],
             });
         console.log("今回の返答: ", completion)
         return completion;
