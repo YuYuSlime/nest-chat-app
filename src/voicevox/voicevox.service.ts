@@ -4,7 +4,7 @@ import axios from "axios";
 @Injectable()
 export class VoiceVoxService {
     async generateVoice(message: string): Promise<Buffer>{
-        const speaker= 66;
+        const speaker= 74;
 
         const audioQueryResponse = await axios.post(
             `http://localhost:50021/audio_query?text=${encodeURIComponent(message)}&speaker=${speaker}`,
