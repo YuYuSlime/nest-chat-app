@@ -21,11 +21,12 @@ let OpenAIService = class OpenAIService {
         });
     }
     async sendMessageToOpenAI(message) {
-        const response = await this.openai.chat.completions.create({
+        const completion = await this.openai.chat.completions.create({
             model: 'gpt-3.5-turbo',
             messages: [{ role: 'user', content: message }],
         });
-        return response.choices[0].message.content;
+        console.log("今回の返答: ", completion);
+        return completion;
     }
 };
 exports.OpenAIService = OpenAIService;

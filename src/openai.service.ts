@@ -12,12 +12,12 @@ import { Messages } from "openai/resources/beta/threads/messages";
                 apiKey: this.configService.get<string>('OPENAI_API_KEY'),
            });
         }
-        async sendMessageToOpenAI(message: string): Promise<string> {
-            const response = await this.openai.chat.completions.create({
+        async sendMessageToOpenAI(message: string): Promise<any> {
+            const completion = await this.openai.chat.completions.create({
                 model: 'gpt-3.5-turbo',
                 messages: [{role: 'user', content: message}],
             });
-        
-        return response.choices[0].message.content;
+        console.log("今回の返答: ", completion)
+        return completion;
     }
 }
