@@ -1,11 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { ConfigModule } from '@nestjs/config';
-import { OpenAIService } from './openai.service';
+import { OpenAIModule } from './openai/openai.module';
+import { VoiceVoxModule } from './voicevox/voicevox.module';
+
 
 @Module({
-  imports: [ConfigModule.forRoot()],
-  controllers: [AppController],
-  providers: [OpenAIService],
+    imports: [OpenAIModule, VoiceVoxModule]
 })
 export class AppModule{}
