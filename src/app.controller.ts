@@ -1,21 +1,16 @@
 import { Body,Controller, Post } from '@nestjs/common';
-import { PusherService } from './pusher.service';
+import { OpenAIService } from './openai.service';
+
 
 @Controller("api")
 export class AppController {
-  constructor(private pusherService: PusherService) {
+  constructor(private readonly openaiService: OpenAIService) {}
 
-  }
-
-  @Post("messages")
-  async messages(
-    @Body("username") username:string,
+  @Post("chat")
+  async getChatResponse(
     @Body("message") message: string
  ){
-  await this.pusherService.trigger("chat", "message", {
-    username,
-    message
-  });
-  return [];
+const response = await this.openaiService.sendMessageToOpenAI(message);
+  return {response};
  }
 }

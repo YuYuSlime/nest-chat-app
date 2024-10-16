@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { PusherService } from './pusher.service';
+import { ConfigModule } from '@nestjs/config';
+import { OpenAIService } from './openai.service';
 
 @Module({
-  imports: [],
+  imports: [ConfigModule.forRoot()],
   controllers: [AppController],
-  providers: [PusherService],
+  providers: [OpenAIService],
 })
-export class AppModule {}
+export class AppModule{}

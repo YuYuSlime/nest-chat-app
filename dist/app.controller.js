@@ -14,30 +14,26 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppController = void 0;
 const common_1 = require("@nestjs/common");
-const pusher_service_1 = require("./pusher.service");
+const openai_service_1 = require("./openai.service");
 let AppController = class AppController {
-    constructor(pusherService) {
-        this.pusherService = pusherService;
+    constructor(openaiService) {
+        this.openaiService = openaiService;
     }
-    async messages(username, message) {
-        await this.pusherService.trigger("chat", "message", {
-            username,
-            message
-        });
-        return [];
+    async getChatResponse(message) {
+        const response = await this.openaiService.sendMessageToOpenAI(message);
+        return { response };
     }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, common_1.Post)("messages"),
-    __param(0, (0, common_1.Body)("username")),
-    __param(1, (0, common_1.Body)("message")),
+    (0, common_1.Post)("chat"),
+    __param(0, (0, common_1.Body)("message")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], AppController.prototype, "messages", null);
+], AppController.prototype, "getChatResponse", null);
 exports.AppController = AppController = __decorate([
     (0, common_1.Controller)("api"),
-    __metadata("design:paramtypes", [pusher_service_1.PusherService])
+    __metadata("design:paramtypes", [openai_service_1.OpenAIService])
 ], AppController);
 //# sourceMappingURL=app.controller.js.map

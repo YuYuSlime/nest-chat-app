@@ -9,15 +9,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
-const pusher_service_1 = require("./pusher.service");
+const config_1 = require("@nestjs/config");
+const openai_service_1 = require("./openai.service");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [config_1.ConfigModule.forRoot()],
         controllers: [app_controller_1.AppController],
-        providers: [pusher_service_1.PusherService],
+        providers: [openai_service_1.OpenAIService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
