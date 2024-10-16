@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { OpenAI } from 'openai';
 import {ConfigService} from "@nestjs/config"
-import { Messages } from "openai/resources/beta/threads/messages";
 
 @Injectable()
     export class OpenAIService{
